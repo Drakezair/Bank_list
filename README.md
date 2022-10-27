@@ -1,6 +1,7 @@
-# Getting Started with Create React App
+# Bank app
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+is a simple boilerplate of react with typescript and basic Restfull api integrations
 
 ## Available Scripts
 
@@ -114,7 +115,9 @@ https://flowbite.com/
 1. run `yarn`
 2. run `yarn start`
 
-`Optional` 3. run `yarn cypress:open` (just to see the tests) 4. run `yarn ready` (to check if the code is ready to be commited)
+#### Optional
+
+3.  run `yarn cypress:open` (just to see the tests) 4. run `yarn ready` (to check if the code is ready to be commited)
 
 ## Notes
 
