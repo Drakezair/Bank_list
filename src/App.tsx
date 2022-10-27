@@ -1,25 +1,39 @@
-import React from 'react';
-import logo from './logo.svg';
+import { createSyncStoragePersister } from '@tanstack/query-sync-storage-persister';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { persistQueryClient } from '@tanstack/react-query-persist-client';
+import { UseApi } from 'BloC/hooks';
+import 'flowbite';
+import ListBank from 'pages/list_banks';
+import { ReactElement } from 'react';
+
 import './App.css';
 
-function App() {
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      cacheTime: 1000 * 60 * 60 * 24 // 24 hours
+    }
+  }
+});
+
+const localStoragePersister = createSyncStoragePersister({
+  storage: window.localStorage
+});
+
+persistQueryClient({
+  queryClient,
+  persister: localStoragePersister
+});
+
+function App(): ReactElement {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <QueryClientProvider client={queryClient}>
+      <UseApi>
+        <ListBank />
+      </UseApi>
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
   );
 }
 
